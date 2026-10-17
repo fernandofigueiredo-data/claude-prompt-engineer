@@ -1,0 +1,32 @@
+name: validar
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Manifestos, frontmatter e links internos
+        run: python3 scripts/validar.py
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validador oficial de plugins do Claude Code
+        run: |
+          npm install -g @anthropic-ai/claude-code@2.1.276
+          claude plugin validate .
+          claude plugin validate plugins/engenharia-de-prompt
+
+      - name: Empacotamento para claude.ai
+        run: scripts/empacotar.sh

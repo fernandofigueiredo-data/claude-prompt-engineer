@@ -1,0 +1,28 @@
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validar antes de publicar
+        run: python3 scripts/validar.py
+
+      - name: Gerar zip da skill
+        run: scripts/empacotar.sh
+
+      - name: Publicar Release com o zip
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          notas=$(awk -v v="${GITHUB_REF_NAME#v}" '$0 ~ "^## \\[" v "\\]" {f=1; next} /^## \[/ {f=0} f' CHANGELOG.md)
+          gh release create "$GITHUB_REF_NAME" dist/engenharia-de-prompt.zip \
+            --title "$GITHUB_REF_NAME" --notes "${notas:-Veja o CHANGELOG.md}"

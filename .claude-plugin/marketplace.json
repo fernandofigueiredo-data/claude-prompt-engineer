@@ -1,0 +1,15 @@
+{
+  "name": "claude-prompt-engineer",
+  "description": "Skill que transforma uma ideia vaga no prompt mais claro e executável para modelos Claude.",
+  "owner": {
+    "name": "Fernando Figueiredo",
+    "url": "https://github.com/fernandofigueiredo-data"
+  },
+  "plugins": [
+    {
+      "name": "engenharia-de-prompt",
+      "source": "./plugins/engenharia-de-prompt",
+      "description": "Diagnostica lacunas, premissas e vieses de uma ideia e devolve o prompt final calibrado para Opus 5.5, Sonnet 5.5, Haiku 5.5 ou Fable 5.1."
+    }
+  ]
+}

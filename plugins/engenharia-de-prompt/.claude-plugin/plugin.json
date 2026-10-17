@@ -1,0 +1,13 @@
+{
+  "name": "engenharia-de-prompt",
+  "version": "1.0.0",
+  "description": "Transforma uma ideia bruta no prompt mais claro, específico e executável para modelos Claude, com diagnóstico de lacunas, premissas e vieses e calibração por modelo.",
+  "author": {
+    "name": "Fernando Figueiredo",
+    "url": "https://github.com/fernandofigueiredo-data"
+  },
+  "homepage": "https://github.com/fernandofigueiredo-data/claude-prompt-engineer",
+  "repository": "https://github.com/fernandofigueiredo-data/claude-prompt-engineer",
+  "license": "MIT",
+  "keywords": ["prompt-engineering", "claude", "skill", "pt-br"]
+}
