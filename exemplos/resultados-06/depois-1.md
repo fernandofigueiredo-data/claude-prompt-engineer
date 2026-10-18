@@ -1,7 +1,5 @@
-Em agosto começamos a usar um assistente de IA para rascunhar as respostas às mensagens de WhatsApp dos pacientes da clínica, com a recepcionista revisando antes de enviar. O tempo médio de primeira resposta caiu de 47 para 12 minutos. Eu achava que esse era o ganho e que estava tudo resolvido.
+Em agosto começamos a usar IA para rascunhar as respostas de WhatsApp dos pacientes. O tempo médio de primeira resposta caiu de 47 para 12 minutos, mas as reclamações sobre "resposta fria" subiram. Eu esperava ganhar velocidade, e ganhei, só que não contava com esse efeito nas duas primeiras semanas.
 
-Nas duas primeiras semanas as reclamações sobre resposta fria subiram. Até que a Marta, recepcionista da unidade Centro, começou a reescrever a primeira frase de cada rascunho com o nome do paciente e alguma coisa da última consulta dele. Ninguém pediu isso a ela.
+Quem virou o jogo foi a Marta, recepcionista da unidade Centro. Por conta própria, ela passou a reescrever a primeira frase de cada rascunho com o nome do paciente e algo da última consulta. Em setembro as reclamações voltaram ao nível de antes, e o tempo continuou em 12 minutos.
 
-Em setembro as reclamações voltaram ao nível de antes e o tempo de primeira resposta continuou em 12 minutos. Eu entrei nisso achando que a IA ia assumir a parte chata do trabalho das meninas da recepção.
-
-O que ela fez foi me mostrar qual parte do trabalho era a importante.
+Eu achava que a IA ia assumir a parte chata do atendimento. Na prática, ela mostrou qual parte do trabalho era a importante. Hoje defendo que a primeira frase de qualquer resposta ao paciente é trabalho da recepção, não da ferramenta.

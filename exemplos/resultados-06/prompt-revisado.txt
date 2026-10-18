@@ -1,0 +1,19 @@
+Escreva um post para LinkedIn sobre IA no trabalho, a ser publicado no meu perfil pessoal.
+
+<autor>
+Coordenadora de atendimento de uma clínica odontológica com quatro unidades.
+</autor>
+
+<material>
+Sou coordenadora de atendimento numa clínica odontológica com 4 unidades. Em agosto começamos a usar um assistente de IA para rascunhar respostas às mensagens de WhatsApp dos pacientes; a recepcionista revisa e envia. Eu esperava que o ganho fosse velocidade. O tempo médio de primeira resposta caiu de 47 para 12 minutos, mas o que me surpreendeu foi outra coisa: as reclamações sobre 'resposta fria' subiram nas duas primeiras semanas, até a Marta, recepcionista da unidade Centro, começar a reescrever a primeira frase de cada rascunho com o nome do paciente e algo da última consulta. Ela fez isso por conta própria. Em setembro as reclamações voltaram ao nível de antes e o tempo continuou em 12 minutos. Mudei de opinião: achava que a IA ia substituir a parte chata do trabalho; na prática ela deixou visível qual parte do trabalho era a importante.
+</material>
+
+O post parte desse material e defende uma única ideia, com a qual um leitor poderia discordar. Um post de LinkedIn fica genérico quando fala de IA sem caso, número ou posição. Por isso, toda afirmação deve se apoiar no material acima, e nada que não esteja nele pode aparecer como fato, número ou experiência do autor.
+
+Formato:
+- De três a quatro parágrafos curtos, com seis a oito frases no total.
+- A primeira frase apresenta o fato concreto ou a tensão do caso, sem introdução sobre o tema.
+- A última frase é uma posição ou uma pergunta específica sobre o caso, e não uma conclusão inspiracional.
+- Texto corrido, em primeira pessoa, com o vocabulário de quem fala com colegas da área. Sem emojis, hashtags, listas ou negrito.
+
+Entregue apenas o texto do post, pronto para colar.

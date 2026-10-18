@@ -1,55 +1,30 @@
 ## Raciocínio
 
-**1. Qual é o ativo real aqui?**
-Não é o número. "47 para 12 minutos" é um dado bom, mas é o tipo de resultado que qualquer post de IA no LinkedIn promete. O ativo é a **contradição**: a métrica que você media melhorou e a métrica que você não media piorou. Isso é raro e é o que para o scroll.
-
-**2. Onde começar?**
-Não na ferramenta, não no número. Começar na expectativa, porque a quebra de expectativa é a estrutura narrativa do post. Se eu abrir com "reduzimos 75% do tempo de resposta", o leitor já sabe o final e não lê o meio.
-
-**3. A Marta é o centro, não um detalhe.**
-Ela resolveu um problema que a coordenação não tinha enxergado, sem ser pedido, com uma intervenção minúscula e específica: a primeira frase. Nomear e descrever exatamente o que ela fez é o que torna o post impossível de confundir com conteúdo genérico. Mantive o nome e a unidade.
-
-**4. A tese precisa ser a sua, não a de consenso.**
-A frase pronta do mercado é "IA não substitui o humano". Vazia. A sua versão é mais afiada: a IA *assumiu* a parte chata — e, ao limpar o ruído, tornou visível qual parte carregava o valor. Isso é mudança de opinião real, não humildade performática.
-
-**5. Fechamento operacional.**
-Terminar com a regra que vocês adotaram, não com pergunta de engajamento ou lição motivacional.
-
----
+1. **Ângulo do post:** o tempo caiu de 47 para 12 minutos, mas isso não é o mais interessante. O ponto central é a mudança de opinião: a IA mostrou qual parte do trabalho realmente importava. O post precisa terminar nessa ideia.
+2. **Estrutura:** expectativa, resultado esperado, problema inesperado, a solução que a Marta encontrou sozinha, os números de setembro e o que eu aprendi.
+3. **Como evitar um post genérico:** manter os números exatos (4 unidades, 47 e 12 minutos, duas semanas, setembro), o nome da Marta, a unidade Centro e o que ela fez de fato (o nome do paciente e algo da última consulta). Deixar de fora frases como "a IA veio para ficar" ou "o futuro do trabalho".
+4. **Cuidado com a causa:** os dados mostram que as reclamações voltaram ao nível anterior depois da mudança da Marta. Não provam que ela foi a única causa. Por isso escrevi "até que", e não "graças a".
+5. **Voz:** primeira pessoa e no feminino, porque você é coordenadora. Frases curtas, como se costuma ler no LinkedIn.
 
 ## Post
 
-```
-Em agosto colocamos um assistente de IA para rascunhar as respostas do
-WhatsApp nas nossas quatro unidades. A recepcionista revisa e envia.
+Em agosto começamos a usar um assistente de IA para rascunhar as respostas de WhatsApp nas nossas 4 unidades. As recepcionistas revisam e enviam.
 
-Eu media uma coisa: velocidade. O tempo de primeira resposta caiu de 47
-para 12 minutos.
+Eu esperava ganhar velocidade, e ganhamos: o tempo médio de primeira resposta caiu de 47 para 12 minutos.
 
-O que eu não media apareceu em duas semanas: reclamações de "resposta fria".
+Mas, nas duas primeiras semanas, as reclamações de "resposta fria" subiram.
 
-A solução não veio de mim nem da ferramenta. A Marta, da unidade Centro,
-começou a reescrever só a primeira frase de cada rascunho: nome do paciente
-e algo da última consulta. Ninguém pediu. Em setembro as reclamações
-voltaram ao patamar anterior e o tempo continuou em 12 minutos.
+Até que a Marta, recepcionista da unidade Centro, começou por conta própria a reescrever a primeira frase de cada rascunho com o nome do paciente e algo da última consulta.
 
-Eu achava que a IA ia assumir a parte chata do trabalho. Ela assumiu. E
-deixou exposto qual parte era a importante, e que essa parte depende de
-alguém que conhece o paciente.
+Em setembro, as reclamações voltaram ao nível de antes. O tempo continuou em 12 minutos.
 
-Hoje a primeira frase é nossa. O resto é rascunho.
-```
+Eu achava que a IA ia tirar de nós a parte chata do trabalho. Na prática, ela deixou visível qual parte era a importante: a frase que mostra ao paciente que alguém se lembra dele.
 
----
+Obrigada, Marta.
 
 ## Verificação
 
-| Restrição | Resultado |
-|---|---|
-| Máximo 150 palavras | 143 palavras |
-| Sem emojis | Nenhum |
-| Sem hashtags | Nenhuma |
-| Não genérico | Dados concretos (47→12 min, 4 unidades, agosto/setembro), pessoa nomeada, tática específica (reescrever a primeira frase), tese contraintuitiva |
-| Mudança de opinião presente | Sim, nos dois últimos parágrafos |
-
-Duas observações antes de publicar: confirme com a Marta que ela está confortável em ser citada pelo nome — o post a expõe positivamente, mas é a história dela. E se a clínica tiver política sobre divulgar uso de IA no atendimento ao paciente, vale checar, porque o post torna isso público.
+- **Tamanho:** cerca de 135 palavras, dentro do limite de 150.
+- **Emojis e hashtags:** nenhum.
+- **Fatos:** batem com o que você contou.
+- **Antes de publicar:** vale pedir autorização à Marta para citar o nome dela.

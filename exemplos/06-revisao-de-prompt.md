@@ -8,68 +8,60 @@
 
 ## Resposta da skill
 
-Saída integral, sem edição. Modelo: `claude-opus-5` · Claude Code `claude -p` · 17/10/2026.
+Saída integral, sem edição. Modelo: `claude-opus-5-5` · Claude Code `claude -p` · 17/10/2026.
 
 **DIAGNÓSTICO**
 
-O pedido é um prompt reutilizável para posts de LinkedIn em primeira pessoa, uso em chat, arquétipo de escrita. Os dois sintomas têm causas distintas: o tamanho vem de `mostrar todo o seu raciocínio`, técnica descontinuada que infla a resposta com o raciocínio que já é interno e adaptativo, agravada por um limite em contagem de palavras, que os modelos cumprem mal; a genericidade vem da ausência de matéria-prima, porque `NUNCA seja genérico` é critério não inspecionável e nenhum modelo consegue ser específico sobre uma categoria como "IA no trabalho" sem um caso concreto para contar. Os demais defeitos são de técnica: ênfase agressiva em caixa alta, que dispara verificação e cautela em excesso; proibições sem prescrição equivalente; instrução de autoverificação herdada; e um papel de especialista em marketing digital que produz exatamente o tom de peça publicitária que você não quer. A correção estrutural é trocar a proibição de ser genérico por um slot de entrada que exige o caso concreto, mais um critério de especificidade conferível frase a frase.
+Os dois sintomas têm causas diferentes no prompt. **Tamanho:** a instrução "pense passo a passo e mostre todo o seu raciocínio" manda o modelo escrever o raciocínio junto com o post, e a resposta incha. Além disso, limite em palavras é algo que os modelos cumprem mal; em número de frases eles acertam. **Genericidade:** o modelo não tem nada específico sobre o que escrever. Faltam autor, público, caso concreto e posição, e "NUNCA seja genérico" não diz o que conta como específico. Sem material real, a única saída do modelo é o lugar-comum sobre "IA transformando o trabalho". O ponto que mais pesa na qualidade é o bloco `<material>`: o post só deixa de ser genérico quando parte de um fato que só você tem. Isso é um prompt de uso único, para escrita.
 
 **PROMPT FINAL**
 
 ```
-<contexto>
-Este post será publicado no perfil pessoal de LinkedIn de quem escreve. O leitor é um profissional rolando o feed, que abandona em duas linhas qualquer texto com cara de conselho geral sobre tecnologia.
-</contexto>
+Escreva um post para LinkedIn sobre IA no trabalho, a ser publicado no meu perfil pessoal.
+
+<autor>
+[Seu cargo, sua área e quem costuma te ler. Ex.: gerente de operações em uma rede de varejo; o público são gestores de empresas médias.]
+</autor>
 
 <material>
-[Cole aqui uma situação concreta que você viveu ou observou envolvendo IA no trabalho: o que aconteceu, com quem, em que contexto, e qualquer número, prazo ou resultado real que você conheça. Inclua o que te surpreendeu ou fez mudar de opinião.]
+[Um fato concreto da sua experiência: algo que você testou, viu dar errado, mediu ou que te fez mudar de opinião. Ex.: "Passamos a usar IA para resumir chamados de suporte. O tempo de triagem caiu de 40 para 15 minutos, mas os atendentes pararam de ler os chamados inteiros."]
 </material>
 
-<tarefa>
-Escreva um post de LinkedIn a partir do material acima, na primeira pessoa, mantendo o ponto de vista e o vocabulário de quem relatou a situação.
-</tarefa>
+O post parte desse material e defende uma única ideia, com a qual um leitor poderia discordar. Um post de LinkedIn fica genérico quando fala de IA sem caso, número ou posição. Por isso, toda afirmação deve se apoiar no material acima, e nada que não esteja nele pode aparecer como fato, número ou experiência do autor.
 
-<regras>
-Use apenas o que está no material. Se faltar um dado que o post pediria, como número, nome ou resultado, escreva o post sem ele em vez de estimar: dado inventado em post público custa credibilidade.
-Se o material não trouxer nenhuma situação concreta, não escreva o post. Responda com as duas ou três perguntas que faltam para escrevê-lo.
-Escreva em texto corrido, só palavras e pontuação, sem emojis, sem hashtags, sem marcadores e sem negrito. O registro é de alguém contando algo, não de peça de marketing.
-</regras>
+Formato:
+- De três a quatro parágrafos curtos, com seis a oito frases no total.
+- A primeira frase apresenta o fato concreto ou a tensão do caso, sem introdução sobre o tema.
+- A última frase é uma posição ou uma pergunta específica sobre o caso, e não uma conclusão inspiracional.
+- Texto corrido, em primeira pessoa, com o vocabulário de quem fala com colegas da área. Sem emojis, hashtags, listas ou negrito.
 
-<formato_de_saida>
-Apenas o texto do post, pronto para colar, sem título e sem nenhum comentário antes ou depois.
-Primeira frase entrega a situação, e não uma pergunta retórica nem uma tese sobre o futuro do trabalho.
-Corpo em dois a quatro parágrafos, no máximo três frases cada.
-Fechamento em uma frase.
-</formato_de_saida>
-
-<criterios_de_sucesso>
-Nenhuma frase do post continua verdadeira se trocar o setor, a empresa, a pessoa ou o ano: toda afirmação está amarrada ao caso relatado.
-O post não contém nenhuma frase que seja observação geral sobre IA, produtividade ou futuro do trabalho.
-Quem conhece o autor reconhece a história como dele.
-Aplique os três critérios ao post inteiro, não apenas ao primeiro parágrafo.
-</criterios_de_sucesso>
+Entregue apenas o texto do post, pronto para colar.
 ```
 
 **PREMISSAS / LACUNAS**
 
-- `assumido` Post no perfil pessoal, em primeira pessoa; perfil de empresa ou marca pediria outro registro e outro fechamento.
-- `assumido` Uso repetido, com material diferente a cada post; daí o slot `<material>` em vez de um tema fixo no prompt.
-- `assumido` Escrito para rodar em chat, sem controle de esforço, compatível com Opus 5.5 e Sonnet 5.5.
-- `indefinido` O assunto real. "IA no trabalho" é categoria, não assunto: o que o post diz passa a ser definido a cada execução pelo material colado.
-- `indefinido` Objetivo do post, como autoridade, atração de clientes ou recrutamento. Havendo um, ele muda o fechamento.
+- assumido: o post sai no seu perfil pessoal, em primeira pessoa.
+- assumido: as 150 palavras viraram de seis a oito frases, que dá mais ou menos a mesma extensão e é um limite que o modelo cumpre melhor.
+- indefinido: os blocos `<autor>` e `<material>` precisam ser preenchidos por você. Sem eles, o post volta a ficar genérico, seja qual for o prompt.
 
 **AJUSTES OPCIONAIS**
 
-- **Uso único:** substitua o bloco `<material>` pelo relato escrito direto e apague a segunda linha de `<regras>`, que só existe para o caso de slot vazio.
-- **Objetivo comercial declarado:** acrescente em `<formato_de_saida>` qual porta o fechamento abre, por exemplo `A última frase convida a comentar com uma experiência parecida, sem pedir contato`. Sem isso o fechamento sai neutro.
-- **Cortado do original e por quê:** o papel de especialista em marketing, que produzia o tom publicitário; o pedido de raciocínio visível, descontinuado e causa do excesso de texto; o limite de 150 palavras, trocado por limite em frases, que é conferível por inspeção; a autoverificação final, que em modelos atuais só adiciona cautela; e as quatro proibições, convertidas em uma prescrição positiva de texto corrido.
+O que foi cortado do prompt original, e por quê:
+- "Pense passo a passo e mostre todo o seu raciocínio": era a principal causa do tamanho. Os modelos atuais já raciocinam por conta própria, e pedir que escrevam o raciocínio coloca esse texto dentro da resposta.
+- "Especialista de nível mundial": não muda a saída. Quem define o tom é a descrição do autor e do público.
+- "CRÍTICO", "DEVE SEMPRE", "NUNCA" em caixa alta: ênfase agressiva faz o modelo exagerar na reação, sem melhorar o resultado.
+- "Verifique sua resposta antes de enviar": é redundante e só deixa a resposta mais lenta.
+- "Máximo 150 palavras": virou contagem de frases e parágrafos.
+- "NUNCA seja genérico": virou um critério que dá para conferir (cada afirmação apoiada no material) e uma estrutura fixa de abertura e fechamento.
+
+Variante útil: para escolher entre opções, troque a última linha por "Entregue três versões do post, cada uma com uma abertura diferente: um número, uma cena e uma afirmação contraintuitiva."
 
 ---
 
 ## O que observar
 
-- **Defeitos nomeados por categoria e ligados aos sintomas.** O tamanho vem do pedido de raciocínio visível e do limite em palavras; a genericidade vem da falta de matéria-prima, não de falta de instrução.
-- **Antipadrões removidos:** papel superlativo (`especialista de nível mundial`), ênfase em caixa alta, `pense passo a passo e mostre todo o seu raciocínio` (que a família 5.5 pode recusar), contagem de palavras, autoverificação herdada e quatro proibições sem alternativa.
-- **`Nunca seja genérico` virou critério inspecionável.** Nenhuma frase do post continua verdadeira se trocar setor, empresa, pessoa ou ano.
-- **Instrução positiva.** As proibições de emoji, hashtag e marcadores viraram `texto corrido, só palavras e pontuação`.
-- **O que foi cortado e por quê** aparece em AJUSTES OPCIONAIS, como o formato de saída exige em revisões.
+- **Defeitos ligados aos sintomas.** O tamanho vem do pedido de raciocínio visível e do limite em palavras; a genericidade vem da falta de matéria-prima, não de falta de instrução.
+- **Antipadrões removidos, um a um, com o motivo:** papel superlativo, ênfase em caixa alta, `pense passo a passo e mostre todo o seu raciocínio`, autoverificação herdada, contagem de palavras.
+- **`Nunca seja genérico` virou critério inspecionável.** Toda afirmação precisa se apoiar no material; nada fora dele aparece como fato ou experiência do autor; abertura e fechamento têm forma definida.
+- **Ponto a observar.** As proibições de emoji e hashtag continuaram como proibição (`Sem emojis, hashtags, listas ou negrito`), em vez de virarem uma prescrição positiva como pede o princípio 5. Como não há equivalente positivo natural para elas, a escolha é defensável, mas não é a regra aplicada à risca.
+- **Efeito medido.** Em [`resultados-06/`](resultados-06/), o prompt original e este revisado rodam três vezes cada sobre o mesmo material.

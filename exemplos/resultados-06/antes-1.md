@@ -1,47 +1,29 @@
-## Raciocínio
+## Como montei o post
 
-**1. O que torna um post sobre IA genérico**
-Os clichês saturados do LinkedIn: "a IA não vai te substituir, mas quem usa IA vai", "prompt é o novo Excel", "estamos vivendo a maior revolução desde a internet". Todos são afirmações sem mecanismo — ninguém sai deles sabendo o que fazer diferente amanhã.
-
-**2. Buscar um ângulo com informação real**
-Preciso de uma observação que o leitor não tenha visto repetida. Candidatos:
-- O tempo economizado na redação migra para a revisão (bom, mas já circula)
-- IA infla filas de aprovação porque gera trabalho medíocre mais rápido (interessante)
-- **IA só gera ganho quando verificar o resultado é mais barato que produzi-lo** (este é o mais forte: é um critério de decisão, não uma opinião)
-
-**3. Escolha**
-Fico com o custo de verificação. É contraintuitivo, explica por que tantos pilotos de IA fracassam e entrega uma pergunta aplicável.
-
-**4. Estrutura**
-Dois casos concretos com números → o contraste → o mecanismo → a pergunta prática. Sem introdução de aquecimento, porque o LinkedIn corta no terceiro verso.
-
----
+- **Público:** gestores e profissionais no LinkedIn, que já leram muitos textos dizendo que "a IA vai transformar o trabalho".
+- **O que evita o genérico:** abrir com um caso concreto, com números, em vez de uma frase de efeito.
+- **Ideia central:** medir a IA por horas economizadas é o critério errado. O que importa é o que a equipe faz com o tempo que sobra.
+- **Estrutura:** caso real, virada, crítica a uma prática comum, pergunta incômoda e uma chamada simples para comentários.
 
 ## Post
 
-Na semana passada usei IA em duas tarefas de tamanho parecido.
+Na semana passada, uma analista do nosso time levou 40 minutos para resumir 12 entrevistas com clientes usando IA. Antes, levava dois dias.
 
-Na primeira, pedi 40 variações de assunto de e-mail. Levei 6 minutos para escolher três. Ganho real.
+O ganho não veio da ferramenta. Veio do que ela fez com os dois dias que sobraram: ligou de volta para três clientes que tinham dito algo contraditório e descobriu por que estávamos perdendo contratos no segundo mês.
 
-Na segunda, pedi a análise de um contrato de fornecedor. Levei 2 horas conferindo cada cláusula contra o documento original. Teria sido mais rápido sozinho.
+A IA não cortou o trabalho dela. Cortou a parte que ninguém queria fazer e deixou a parte que só ela sabia fazer.
 
-A diferença não foi a dificuldade da tarefa. Foi o custo de verificar o resultado.
+O erro que vejo em muitas empresas é medir a IA por horas economizadas. Hora economizada que vira mais reunião não vale nada.
 
-Um assunto de e-mail eu avalio em segundos. Uma cláusula errada eu só descubro relendo tudo — e aí a IA não economizou nada, apenas trocou meu trabalho de escrever pelo de auditar.
+A pergunta certa é outra: o que sua equipe faria com 30% do tempo de volta? Se você não tem resposta, o problema não é a tecnologia.
 
-Antes de automatizar qualquer coisa, pergunte: quanto tempo levo para saber se a resposta está certa?
-
-Se verificar custa o mesmo que executar, você não ganhou produtividade. Ganhou uma segunda tarefa.
-
----
+Qual tarefa você entregaria para a IA amanhã?
 
 ## Verificação
 
-| Restrição | Status |
-|---|---|
-| Máximo 150 palavras | 133 palavras |
-| Sem emojis | Nenhum |
-| Sem hashtags | Nenhuma |
-| Não genérico | Dois casos com números, mecanismo nomeado (custo de verificação), critério aplicável |
+- **Tamanho:** 142 palavras, dentro do limite de 150.
+- **Emojis:** nenhum.
+- **Hashtags:** nenhuma.
+- **Especificidade:** tem números, uma situação concreta e uma posição clara.
 
-Uma observação honesta: os dois exemplos são ilustrativos. Se você for publicar, troque pelos seus casos reais — no LinkedIn, especificidade inventada é detectável e custa mais credibilidade do que o post ganha em alcance. Posso reescrever com as suas duas tarefas se você me passar quais foram.
+**Antes de publicar:** o caso da analista é um exemplo inventado. Troque pelos números de uma situação real sua. No LinkedIn, um caso falso perde credibilidade rápido.

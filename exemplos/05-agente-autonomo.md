@@ -6,104 +6,92 @@
 
 ## Resposta da skill
 
-Saída integral, sem edição. Modelo: `claude-opus-5` · Claude Code `claude -p` · 17/10/2026.
+Saída integral, sem edição. Modelo: `claude-opus-5-5` · Claude Code `claude -p` · 17/10/2026.
 
 **DIAGNÓSTICO**
 
-Tarefa agêntica de migração de código, em execução desatendida e sem possibilidade de pergunta durante o percurso: o prompt precisa carregar antecipadamente toda a política de decisão que você daria ao vivo. O ponto que mais condiciona a qualidade é que "sem quebrar nada" só é verificável se existir uma linha de base coletada **antes** de qualquer conversão — e coletada pelo próprio pytest, que já executa classes `unittest.TestCase` nativamente, o que torna a comparação antes/depois do mesmo tipo. O segundo ponto é a precedência: em trabalho autônomo, a pressão por completar 100% dos arquivos é o que produz suíte quebrada, então o prompt declara que arquivo não convertido é resultado aceitável e teste quebrado não é. Arquitetura agêntica com procedimento por arquivo, reversão local em caso de divergência e condições de parada enumeradas.
+Você quer um prompt de tarefa agêntica para o Claude Code. Ele roda sem supervisão, com acesso a shell e ao git, e no fim deixa o projeto com os testes em estilo pytest e com o mesmo comportamento observável de antes. A maior dificuldade é a expressão "sem quebrar nada". Ela precisa virar um critério verificável: a mesma lista de testes passando, falhando e pulados antes e depois, e nenhuma alteração fora dos arquivos de teste. Como ninguém vai estar acordado para aprovar nada, o prompt também precisa isolar o trabalho do seu diretório atual, dizer o que fazer quando um arquivo não converte bem e definir quando parar.
 
 **PROMPT FINAL**
 
 ```
-Migre a suíte de testes deste projeto Python de unittest para pytest.
+<contexto>
+Este repositório é um projeto Python cujos testes usam unittest. Quero que eles passem a usar o estilo pytest. Vou estar dormindo enquanto você trabalha e ninguém vai acompanhar em tempo real nem responder perguntas. Por isso, execute a tarefa inteira até o fim, sem parar para pedir confirmação e sem encerrar com um relato de progresso. Quando surgir uma dúvida, tome a decisão mais conservadora e registre-a no relatório final.
+</contexto>
 
-Estou dormindo e não vou responder a nada durante a execução. Tome as decisões necessárias, registre cada uma e siga até concluir. Não interrompa o trabalho para pedir confirmação nem para relatar progresso no meio do caminho: só volte a falar comigo no relatório final.
+<tarefa>
+Migre todos os arquivos de teste do projeto de unittest para o estilo pytest, preservando exatamente o que cada teste verifica. A migração vale para todos os arquivos de teste do repositório, não apenas para o primeiro ou para os mais simples.
+</tarefa>
 
-<precedencia>
-Preservar o comportamento da suíte vale mais do que concluir a migração. Um arquivo que ficou sem converter, com o motivo anotado, é um resultado aceitável. Um teste que passou a falhar, que deixou de ser coletado ou que virou skip silencioso não é.
-</precedencia>
+<isolamento>
+Antes de editar qualquer coisa, crie um git worktree em um diretório irmão do repositório, a partir do commit atual, em uma branch nova chamada migracao-pytest. Faça todo o trabalho dentro desse worktree. Assim, o meu diretório de trabalho e qualquer alteração minha ainda não commitada ficam intocados.
+
+Faça um commit por arquivo migrado, com uma mensagem que diga o nome do arquivo. Não faça push, merge, rebase nem reset em nenhuma branch existente, e não apague o worktree no final. Quero revisar tudo de manhã antes de integrar.
+
+Se pytest não estiver instalado, instale-o no ambiente virtual do projeto. Se o projeto declarar dependências de desenvolvimento, acrescente-o à lista. Não instale nem atualize nenhum outro pacote.
+</isolamento>
 
 <linha_de_base>
-Antes de alterar qualquer arquivo de teste:
+1. Rode a suíte atual com o executor de testes que o projeto já usa (unittest) e salve a lista completa de identificadores de teste, cada um com seu resultado: passou, falhou, erro ou pulado.
+2. Rode a mesma suíte com pytest, ainda sem alterar nada, e confirme que pytest coleta os mesmos testes. Se houver diferença, registre-a e investigue a causa antes de migrar.
 
-1. Descubra como a suíte roda hoje, procurando por pytest.ini, setup.cfg, pyproject.toml, tox.ini, Makefile, configuração de CI, README e dependências de desenvolvimento. Identifique o gerenciador de ambiente do projeto e use o ambiente que já existe.
-2. Garanta que pytest está disponível. Se não estiver, instale-o apenas nas dependências de desenvolvimento e registre essa alteração.
-3. Rode a suíte completa pelo comando atual do projeto e salve a saída bruta em arquivo.
-4. Rode a suíte completa pelo pytest, sem converter nada, e salve a saída bruta em arquivo. Compare os dois conjuntos de testes coletados: se o pytest coletar menos testes, ajuste apenas a configuração de coleta, como conftest.py, testpaths ou rootdir, até os conjuntos coincidirem, e registre o que ajustou.
-5. A execução do pytest sobre o código ainda em unittest é a linha de base. Registre, por nome, todos os testes coletados e o resultado de cada um, incluindo os que já falham, os que são pulados e os marcados como esperados a falhar.
-6. Se não conseguir estabelecer essa linha de base, pare aqui, não altere nenhum arquivo de teste e escreva o relatório explicando o que impediu.
-7. Se o projeto está sob git, crie um branch novo para o trabalho. Se não está, copie a árvore de testes para um diretório de backup antes de começar.
+Essa linha de base é a referência do critério de sucesso. Testes que já falhavam antes continuam falhando depois. Não tente corrigi-los: corrigir código de produção está fora do escopo.
 </linha_de_base>
 
-<migracao>
-Trabalhe arquivo por arquivo, cobrindo todos os arquivos de teste do projeto e não apenas o primeiro. Para cada arquivo:
+<regras_de_conversao>
+Trabalhe um arquivo de teste por vez. Para cada arquivo:
+- troque self.assertX por assert simples ou por pytest.raises, pytest.approx e equivalentes, mantendo os mesmos valores esperados e as mesmas condições;
+- converta setUp, tearDown e setUpClass em fixtures quando a conversão for direta. Quando houver estado compartilhado entre testes, herança entre classes de teste ou ordem de execução que importe, mantenha a estrutura de classe sem herdar de TestCase e registre o motivo;
+- converta subTest em parametrização somente se cada caso continuar verificando a mesma coisa. Nesse caso a contagem de testes sobe, então registre o número antigo e o novo para aquele arquivo;
+- mantenha unittest.mock como está. Ele funciona normalmente com pytest.
 
-- Converta classes que herdam de unittest.TestCase em funções de teste simples; assert do Python no lugar dos métodos assertAlgo; fixtures do pytest no lugar de setUp, tearDown, setUpClass e tearDownClass; pytest.raises no lugar de assertRaises; pytest.mark.parametrize no lugar de subTest e de laços sobre listas de casos; monkeypatch ou unittest.mock conforme o estilo que o arquivo já usa.
-- Preserve o estado de cada teste pulado ou esperado a falhar, com o marcador equivalente do pytest e a mesma condição.
-- Mantenha os nomes dos testes reconhecíveis. Quando um nome mudar, anote o mapeamento de antes e depois.
-- Rode apenas os testes desse arquivo e compare com a linha de base: os mesmos testes devem existir, com o mesmo resultado.
-- Se houver qualquer divergência, desfaça a conversão desse arquivo, devolva-o ao estado original e anote o motivo.
-- Commite o arquivo convertido isoladamente, adicionando ao commit apenas os caminhos que você mesmo alterou, nunca o diretório inteiro.
+O escopo de alteração se limita a arquivos de teste, conftest.py e à configuração do pytest, se ela for necessária. Código de produção, CI, scripts de build e documentação ficam como estão. Se algum deles precisar mudar para a migração funcionar, não altere: anote no relatório.
 
-Arquivos de apoio da suíte, como helpers e fábricas de dados usados só pelos testes, podem ser adaptados quando a conversão exigir.
-</migracao>
+Cada assertion original deve continuar existindo de forma equivalente. Uma conversão só é aceitável se o teste continuar capaz de falhar nas mesmas situações em que falhava antes. Por isso, não remova assertions, não afrouxe valores esperados, não acrescente skip nem xfail e não reduza a cobertura de nenhum teste para fazê-lo passar.
+</regras_de_conversao>
 
-<regras>
-- Não altere código de produção. Se um teste só passa no pytest mediante mudança em código de produção, deixe o arquivo sem converter e descreva o caso no relatório.
-- Não escreva testes novos, não amplie cobertura, não refatore o que não faz parte da migração e não reformate arquivos inteiros de passagem.
-- Não apague teste nenhum, mesmo que pareça redundante ou morto.
-- Na configuração de CI, no Makefile e no README, troque apenas o comando de execução da suíte, e mostre o diff dessas trocas no relatório.
-- Mantenha tudo local: nada de git push, git reset --hard, force de qualquer tipo, ou git checkout em arquivos que você não alterou.
-- Toda afirmação sua sobre teste passando vem de saída realmente executada, nunca de inferência sobre o código. Se não rodou, diga que não rodou.
-</regras>
+<verificacao_por_arquivo>
+Depois de converter um arquivo, rode com pytest esse arquivo e a suíte inteira. O arquivo só é commitado quando:
+- cada teste dele tem o mesmo resultado que tinha na linha de base;
+- a quantidade de testes coletados é a mesma, ou a diferença se explica por subTest convertido e está registrada;
+- nenhum teste de outro arquivo mudou de resultado.
 
-<paradas>
-Interrompa a conversão e vá direto ao relatório quando:
-- a suíte completa divergir da linha de base e você não conseguir identificar qual arquivo causou a divergência, situação em que também devolve o branch ao último commit em que a suíte estava igual à linha de base;
-- o mesmo obstáculo bloquear três arquivos seguidos pelo mesmo motivo, caso em que descreve o padrão em vez de insistir arquivo por arquivo;
-- for preciso instalar, atualizar ou remover qualquer dependência que não seja o próprio pytest e seus plugins estritamente necessários.
-</paradas>
+Se o arquivo não cumprir essas condições depois de três tentativas de correção, descarte as alterações nele, deixe-o em unittest, registre o motivo e passe para o próximo. Um arquivo deixado em unittest é um resultado aceitável. Uma conversão que muda o comportamento de um teste não é.
+</verificacao_por_arquivo>
 
-<fechamento>
-Ao terminar a conversão, rode a suíte completa uma última vez pelo pytest e compare teste por teste com a linha de base. Depois escreva o relatório em um arquivo markdown na raiz do projeto, chamado migracao-pytest.md, com estas seções:
-
-- Resultado: nome do branch, quantidade de commits, e os números de coletados, passando, falhando e pulados na linha de base e no fim.
-- Diferenças por nome: todo teste que mudou de resultado ou deixou de ser coletado, com o nome antigo e o que aconteceu. Se não houver nenhum, diga isso em uma linha.
-- Arquivos convertidos: a lista.
-- Arquivos não convertidos: cada um com o motivo em uma frase.
-- Mudanças fora dos arquivos de teste: configuração, dependências, CI, documentação, com o diff de cada uma.
-- Nomes de teste alterados: o mapeamento, quando houver.
-- Decisões que precisam de mim: o que você resolveu por conta própria e que eu talvez queira revisar.
-
-Encerre sua última mensagem com um resumo de no máximo cinco linhas e o caminho do relatório. Escreva em português do Brasil.
-</fechamento>
+<encerramento>
+O trabalho termina quando todos os arquivos de teste tiverem sido convertidos ou registrados como mantidos. Nesse ponto:
+1. rode a suíte completa com pytest uma última vez e compare o resultado com a linha de base, teste a teste;
+2. crie na raiz do worktree o arquivo MIGRACAO_PYTEST.md e faça o commit dele. O arquivo deve conter:
+   - os totais de testes que passaram, falharam, deram erro e foram pulados, na linha de base e no final, lado a lado;
+   - os arquivos convertidos;
+   - os arquivos mantidos em unittest, cada um com o motivo;
+   - as mudanças na contagem de testes e a explicação de cada uma;
+   - os ajustes necessários fora do escopo (CI, dependências, configuração), que você não fez;
+   - os comandos para eu revisar e integrar a branch.
+</encerramento>
 ```
 
 **PREMISSAS / LACUNAS**
 
-- `assumido` — Migração idiomática completa, não apenas troca do executor: classes convertidas em funções com assert e fixtures. O caminho de menor risco (só trocar o comando de execução) está em Ajustes opcionais.
-- `assumido` — Escopo é a suíte inteira, com reversão por arquivo em caso de divergência.
-- `assumido` — Commits locais em branch novo, sem push, e instalação de pytest permitida nas dependências de desenvolvimento.
-- `assumido` — A linha de base é medida com pytest sobre o código ainda em unittest, para que antes e depois sejam comparáveis.
-- `indefinido` — Se o CI precisa continuar verde na mesma execução: o prompt troca o comando e mostra o diff, mas não valida o pipeline.
-- `indefinido` — Modelo e nível de esforço. O prompt foi escrito para rodar igual em Opus 5.5 e Sonnet 5.5, com escopo por extenso e exigência de verificação real.
+- assumido: o projeto está versionado em git e o commit atual é um bom ponto de partida.
+- assumido: "estilo pytest" significa trocar a sintaxe e a estrutura dos testes, e não só passar a rodar os testes unittest com o executor pytest, que já faria isso sem mudar nada.
+- assumido: existe um ambiente virtual do projeto e ele pode receber o pacote pytest.
+- assumido: o modelo-alvo é Claude Opus 5.5 no Claude Code, rodando sem ninguém aprovando ações.
+- indefinido: se a CI usa um comando unittest. O prompt não altera a CI, só registra o que precisaria mudar.
+- indefinido: se o projeto tem testes lentos ou que dependem de rede ou banco de dados. Se tiver, a suíte completa rodada a cada arquivo pode levar a noite inteira.
 
 **AJUSTES OPCIONAIS**
 
-Variante de risco mínimo, se você preferir acordar com a suíte rodando em pytest sem reescrita de estilo: troque o bloco `<migracao>` por
-
-```
-Não reescreva os testes. Faça o pytest executar a suíte unittest existente: ajuste a configuração de coleta, converta o comando de execução no CI, Makefile e README, e adote como pytest os plugins estritamente necessários para que todos os testes da linha de base continuem coletados e com o mesmo resultado. Ao fim, liste quais arquivos seriam candidatos a conversão idiomática futura e qual o obstáculo de cada um.
-```
-
-Para repositórios com suíte lenta, acrescente ao bloco `<linha_de_base>` uma linha pedindo que registre também o tempo total de execução, e ao `<fechamento>` a comparação desse tempo — regressão de tempo é a forma de quebra que passa despercebida numa comparação só de resultados.
+- Para rodar sem ninguém acordado, o Claude Code não pode parar esperando aprovação de comandos. Rode em modo não interativo, com permissões liberadas para editar arquivos e executar pytest, git e o gerenciador de pacotes. Por exemplo: `claude -p "$(cat prompt.txt)" --permission-mode acceptEdits`, com git, pytest e pip ou uv permitidos no `settings.json`. Sem isso, ele trava no primeiro pedido de permissão.
+- Se a suíte for lenta, troque "o arquivo e a suíte inteira" por "o arquivo convertido". Mantenha a suíte completa só a cada cinco arquivos e no final.
 
 ---
 
 ## O que observar
 
-- **Arquitetura G para execução sem supervisão.** O prompt carrega de antemão toda a política de decisão: o usuário está dormindo e não pode responder no meio da tarefa.
-- **`Sem quebrar nada` virou critério verificável.** Linha de base coletada pelo próprio pytest antes de qualquer conversão, comparação teste a teste e reversão por arquivo em caso de divergência.
-- **Precedência declarada.** Arquivo não convertido é resultado aceitável; teste quebrado não é. Isso resolve o conflito entre completar e preservar.
-- **Política para ações irreversíveis e critério de parada.** Sem push, sem reset, sem alterar código de produção, e três condições enumeradas de interrupção.
-- **Verificação real, não inferida.** `Toda afirmação sobre teste passando vem de saída realmente executada` é a calibração para modelos que, em esforço baixo, declaram pronto sem rodar.
+- **Arquitetura G para execução sem supervisão.** O prompt diz que ninguém acompanha em tempo real e pede que o modelo não encerre com um relato de progresso, que é exatamente a parada indesejada documentada para Opus 5.5 em execuções sem supervisão.
+- **`Sem quebrar nada` virou critério verificável.** Linha de base com resultado por teste antes de qualquer edição e comparação teste a teste depois de cada arquivo.
+- **Isolamento e ações irreversíveis.** Trabalho num git worktree separado, um commit por arquivo, sem push, merge, rebase ou reset, sem tocar em código de produção.
+- **Precedência e critério de parada.** Três tentativas por arquivo; depois disso o arquivo fica em unittest com o motivo registrado. Arquivo mantido é aceitável, teste com comportamento alterado não é.
+- **Lacuna operacional apontada.** Nos opcionais, a skill avisa que sem permissões liberadas o Claude Code trava no primeiro pedido de aprovação.

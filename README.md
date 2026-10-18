@@ -8,7 +8,7 @@ Uma skill para Claude que recebe uma ideia do jeito que ela está na sua cabeça
 
 O problema que ela resolve: a maior parte dos prompts falha não por falta de técnica, mas porque deixa o modelo adivinhar o formato, o escopo, o critério de sucesso e os fatos que ninguém forneceu. Esta skill diagnostica essas lacunas antes de escrever, pergunta só o que muda a forma da saída e calibra o texto para o modelo que vai executá-lo.
 
-> **Em números:** 6 etapas de método · 7 arquiteturas de prompt com esqueleto pronto · 10 testes de robustez antes de cada entrega · 9 padrões de viés auditados · 32 blocos reutilizáveis e 14 antipadrões · 7 exemplos reais com saída integral e 1 comparação medida · calibração para 4 modelos atuais (Opus 5.5, Sonnet 5.5, Haiku 5.5, Fable 5.1) com fontes oficiais de 17/10/2026
+> **Em números:** 6 etapas de método · 7 arquiteturas de prompt com esqueleto pronto · 10 testes de robustez antes de cada entrega · 9 padrões de viés auditados · 32 blocos reutilizáveis e 14 antipadrões · 7 exemplos reais com saída integral e 1 comparação medida em dois modelos · calibração para 4 modelos atuais (Opus 5.5, Sonnet 5.5, Haiku 5.5, Fable 5.1) com fontes oficiais de 17/10/2026
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/metodologia-dark.svg">
@@ -29,58 +29,44 @@ NÃO use emojis. NÃO use hashtags. NUNCA seja genérico.
 Verifique sua resposta antes de enviar.
 ```
 
-O diagnóstico da skill liga cada sintoma a uma causa: o tamanho vem do pedido de raciocínio visível e do limite em contagem de palavras; a genericidade vem da falta de matéria-prima, porque nenhum modelo é específico sobre uma categoria como "IA no trabalho" sem um caso concreto. `NUNCA seja genérico` vira um critério que se confere frase a frase.
+O diagnóstico da skill liga cada sintoma a uma causa: o tamanho vem do pedido de raciocínio visível e do limite em contagem de palavras; a genericidade vem da falta de matéria-prima, porque nenhum modelo é específico sobre "IA no trabalho" sem um caso concreto. `NUNCA seja genérico` vira um critério que se confere: toda afirmação precisa se apoiar no material fornecido.
 
 <details>
 <summary><b>Prompt revisado pela skill</b> (saída integral em <a href="exemplos/06-revisao-de-prompt.md">exemplos/06</a>)</summary>
 
 ```
-<contexto>
-Este post será publicado no perfil pessoal de LinkedIn de quem escreve. O leitor é um profissional rolando o feed, que abandona em duas linhas qualquer texto com cara de conselho geral sobre tecnologia.
-</contexto>
+Escreva um post para LinkedIn sobre IA no trabalho, a ser publicado no meu perfil pessoal.
+
+<autor>
+[Seu cargo, sua área e quem costuma te ler. Ex.: gerente de operações em uma rede de varejo; o público são gestores de empresas médias.]
+</autor>
 
 <material>
-[Cole aqui uma situação concreta que você viveu ou observou envolvendo IA no trabalho: o que aconteceu, com quem, em que contexto, e qualquer número, prazo ou resultado real que você conheça. Inclua o que te surpreendeu ou fez mudar de opinião.]
+[Um fato concreto da sua experiência: algo que você testou, viu dar errado, mediu ou que te fez mudar de opinião. Ex.: "Passamos a usar IA para resumir chamados de suporte. O tempo de triagem caiu de 40 para 15 minutos, mas os atendentes pararam de ler os chamados inteiros."]
 </material>
 
-<tarefa>
-Escreva um post de LinkedIn a partir do material acima, na primeira pessoa, mantendo o ponto de vista e o vocabulário de quem relatou a situação.
-</tarefa>
+O post parte desse material e defende uma única ideia, com a qual um leitor poderia discordar. Um post de LinkedIn fica genérico quando fala de IA sem caso, número ou posição. Por isso, toda afirmação deve se apoiar no material acima, e nada que não esteja nele pode aparecer como fato, número ou experiência do autor.
 
-<regras>
-Use apenas o que está no material. Se faltar um dado que o post pediria, como número, nome ou resultado, escreva o post sem ele em vez de estimar: dado inventado em post público custa credibilidade.
-Se o material não trouxer nenhuma situação concreta, não escreva o post. Responda com as duas ou três perguntas que faltam para escrevê-lo.
-Escreva em texto corrido, só palavras e pontuação, sem emojis, sem hashtags, sem marcadores e sem negrito. O registro é de alguém contando algo, não de peça de marketing.
-</regras>
+Formato:
+- De três a quatro parágrafos curtos, com seis a oito frases no total.
+- A primeira frase apresenta o fato concreto ou a tensão do caso, sem introdução sobre o tema.
+- A última frase é uma posição ou uma pergunta específica sobre o caso, e não uma conclusão inspiracional.
+- Texto corrido, em primeira pessoa, com o vocabulário de quem fala com colegas da área. Sem emojis, hashtags, listas ou negrito.
 
-<formato_de_saida>
-Apenas o texto do post, pronto para colar, sem título e sem nenhum comentário antes ou depois.
-Primeira frase entrega a situação, e não uma pergunta retórica nem uma tese sobre o futuro do trabalho.
-Corpo em dois a quatro parágrafos, no máximo três frases cada.
-Fechamento em uma frase.
-</formato_de_saida>
-
-<criterios_de_sucesso>
-Nenhuma frase do post continua verdadeira se trocar o setor, a empresa, a pessoa ou o ano: toda afirmação está amarrada ao caso relatado.
-O post não contém nenhuma frase que seja observação geral sobre IA, produtividade ou futuro do trabalho.
-Quem conhece o autor reconhece a história como dele.
-Aplique os três critérios ao post inteiro, não apenas ao primeiro parágrafo.
-</criterios_de_sucesso>
+Entregue apenas o texto do post, pronto para colar.
 ```
 
 </details>
 
-Cortados do original, com o motivo registrado na resposta: o papel superlativo, a ênfase em caixa alta, o pedido de raciocínio visível, o limite em palavras, a autoverificação herdada e as quatro proibições sem alternativa.
+**O resultado, medido.** Os dois prompts rodaram três vezes cada no Claude Opus 5.5, e o original rodou também com o mesmo relato colado no fim, para separar o efeito do material do efeito da reescrita:
 
-**O resultado, medido.** Os dois prompts rodaram três vezes cada no mesmo modelo, e o original rodou também com o mesmo relato colado no fim, para separar o efeito do material do efeito da reescrita:
+| Variante | Palavras na resposta | Texto além do post | Caso declarado como inventado | Detalhes do relato usados (de 7) | Emoji ou hashtag |
+|---|---|---|---|---|---|
+| Original | 233 (186–278) | 3 de 3 | 3 de 3 | 0,7 (0–1) | 0 de 3 |
+| Original + o mesmo material | 316 (280–350) | 3 de 3 | 0 de 3 | 6,0 (6–6) | 0 de 3 |
+| Revisado pela skill | 165 (141–188) | 0 de 3 | 0 de 3 | 5,0 (5–5) | 0 de 3 |
 
-| Variante | Palavras na resposta | Com raciocínio ou checklist visível | Detalhes concretos do caso (de 7) | Emoji ou hashtag |
-|---|---|---|---|---|
-| Original | 348 (324–380) | 3 de 3 | 0,7 (0–1) | 0 de 3 |
-| Original + o mesmo material | 428 (391–477) | 3 de 3 | 6,3 (6–7) | 0 de 3 |
-| Revisado pela skill | 152 (147–157) | 0 de 3 | 5,7 (5–6) | 0 de 3 |
-
-O material explica a especificidade: com o mesmo relato, o prompt original também escreve um post concreto. A reescrita explica o resto. O original devolve o post precedido de uma seção de raciocínio (6 de 6 execuções) e, em geral, seguido de uma verificação (5 de 6); sem relato, inventa casos com números fictícios nas três execuções; o revisado devolve só o post, pronto para colar. Método, limites e as nove saídas em [`exemplos/resultados-06/`](exemplos/resultados-06/).
+O material explica a especificidade: com o mesmo relato, o prompt original também escreve um post concreto. A reescrita explica o resto. O original devolve o post cercado de bastidores, contagem de palavras ou avisos em todas as execuções e, sem relato, inventa um caso com números fictícios nas três; o revisado devolve só o post, pronto para colar. O padrão se repete no Claude Opus 5. Método, limites, prompts exatos e as dezoito saídas em [`exemplos/resultados-06/`](exemplos/resultados-06/).
 
 ## Instalação
 
@@ -115,16 +101,16 @@ Quando falta algo que mudaria a forma da saída, vêm até três perguntas fecha
 
 ## Exemplos reais
 
-Sete entradas, com as saídas integrais e sem edição, geradas pela skill em execuções independentes (Claude Opus 5 via Claude Code, 17/10/2026). Comando de reprodução em [`exemplos/`](exemplos/).
+Sete entradas, com as saídas integrais e sem edição, geradas pela skill em execuções independentes (Claude Opus 5.5 via Claude Code, 17/10/2026). Comando de reprodução em [`exemplos/`](exemplos/).
 
 | Exemplo | Arquitetura | O que mostra |
 |---|---|---|
-| [Pedido vago de uso único](exemplos/01-ideia-vaga.md) | B, com bloco de entrada preenchível | lacuna de dados vira campo, não pergunta; advocacia declarada |
-| [Análise com premissa embutida](exemplos/02-analise-com-premissa.md) | B + tratamento de incerteza | `por que fracassou` vira verificação; nenhum benchmark inventado |
-| [Instrução persistente de Project](exemplos/03-instrucao-de-project.md) | E | risco no que falta; severidade definida por consequência |
-| [Pipeline de extração em JSON (Haiku 5.5)](exemplos/04-pipeline-json.md) | F + C | categorias fechadas; e-mail de terceiro tratado como dado |
-| [Agente autônomo de longa duração](exemplos/05-agente-autonomo.md) | G | linha de base antes de mexer; precedência e critério de parada |
-| [Revisão de um prompt que não funciona](exemplos/06-revisao-de-prompt.md) | B | seis antipadrões removidos e explicados |
+| [Pedido vago de uso único](exemplos/01-ideia-vaga.md) | B enxuto, com campos preenchíveis | lacuna de dados vira campo, não pergunta; regra com motivo |
+| [Análise com premissa embutida](exemplos/02-analise-com-premissa.md) | B + tratamento de incerteza | `por que fracassou` vira medição; causas avaliadas com evidência a favor e contra |
+| [Instrução persistente de Project](exemplos/03-instrucao-de-project.md) | E | citação antes da análise; severidade definida por consequência |
+| [Pipeline de extração em JSON (Haiku 5.5)](exemplos/04-pipeline-json.md) | F | categorias fechadas; entrada malformada prevista; prompt estático para cache |
+| [Agente autônomo de longa duração](exemplos/05-agente-autonomo.md) | G | linha de base, worktree isolado, precedência e critério de parada |
+| [Revisão de um prompt que não funciona](exemplos/06-revisao-de-prompt.md) | B enxuto | antipadrões removidos e explicados; efeito medido |
 | [Pedido sem informação suficiente](exemplos/07-lacuna-bloqueante.md) | nenhuma: perguntas | três perguntas fechadas em vez de um molde genérico |
 
 ## O método

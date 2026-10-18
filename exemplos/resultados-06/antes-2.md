@@ -1,33 +1,23 @@
-## Raciocínio
-
-**O risco número um aqui é a genericidade.** Posts de IA no trabalho convergem todos para a mesma tese ("a IA não vai te substituir, quem usa IA vai"). Então o critério de sucesso é: a tese tem que ser uma que o leitor não conseguiria prever pelo primeiro parágrafo.
-
-**Escolha da tese:** em vez de falar de economia de tempo, falar do *deslocamento* do tempo. Automatizar a geração aumenta o custo da revisão — o gargalo migra para o julgamento. Isso é verdadeiro, contraintuitivo e raramente aparece em post de LinkedIn.
-
-**Estrutura:** abrir com número concreto, não com abstração. Inverter a expectativa no terceiro parágrafo. Fechar com uma admissão de erro próprio em vez de um call-to-action — admissão gera mais comentário real que pergunta performática.
-
-**Restrições verificadas:** 144 palavras, zero emojis, zero hashtags.
+**Como montei o post:** abri com um caso concreto em vez de uma frase de efeito, dei ao leitor uma ideia central (IA como primeira leitura, não como substituta), incluí um checklist que dá para usar de imediato e terminei com uma pergunta que puxa comentários. Também conferi as restrições: 143 palavras, sem emojis e sem hashtags.
 
 ---
 
-## Post
+Na semana passada, um analista do meu time levou 40 minutos para revisar um contrato que antes tomava uma tarde inteira. A IA não fez o trabalho por ele. Ela fez a primeira leitura e marcou 11 cláusulas suspeitas. Ele decidiu quais importavam.
 
-Semana passada cronometrei duas tarefas.
+Essa é a diferença que pouca gente mede.
 
-Escrever o primeiro rascunho de um relatório de 12 páginas: 40 minutos com IA, em vez de quatro horas.
+Empresas que tratam IA como substituição cortam custo uma vez. Empresas que tratam IA como primeira leitura ganham tempo toda semana, porque o julgamento continua com quem conhece o contexto.
 
-Revisar esse rascunho: quatro horas, em vez de 40 minutos.
+Antes de colocar IA em qualquer processo, eu faço três perguntas:
 
-O tempo não desapareceu. Mudou de lugar.
+1. Qual etapa hoje é leitura, triagem ou rascunho?
+2. Quem vai revisar o resultado, e com que critério?
+3. Como vamos saber, em 30 dias, se ficou melhor?
 
-É o que não aparece nos slides de produtividade. A IA não elimina trabalho; ela o empurra para onde o julgamento custa mais caro: decidir o que está errado, o que falta, o que nunca deveria estar ali.
+Se a terceira não tem resposta, não é projeto. É experimento sem dono.
 
-Quem usa IA como aceleradora entrega a mesma mediocridade, só mais rápido. Quem usa como fábrica de rascunhos descartáveis ganha outra coisa: mais tentativas, menos apego, decisões melhores.
-
-A pergunta útil para o seu time não é quanto tempo a IA economiza. É se o tempo liberado está virando julgamento ou virando volume.
-
-No meu caso, virou volume por três meses antes de eu perceber.
+Qual etapa do seu trabalho você entregaria primeiro para uma primeira leitura?
 
 ---
 
-Uma ressalva: os números específicos (o relatório de 12 páginas, os três meses) são um andaime. Troque pelos seus dados reais antes de publicar — o formato só funciona se a anedota for verdadeira, e eu não tenho como saber qual é a sua.
+**Antes de publicar:** o caso do contrato é um exemplo que eu inventei. Troque pelo seu caso real, com seus números, porque é isso que faz o post não parecer genérico.

@@ -1,0 +1,31 @@
+<contexto>
+Este post será publicado no perfil pessoal de LinkedIn de quem escreve. O leitor é um profissional rolando o feed, que abandona em duas linhas qualquer texto com cara de conselho geral sobre tecnologia.
+</contexto>
+
+<material>
+Sou coordenadora de atendimento numa clínica odontológica com 4 unidades. Em agosto começamos a usar um assistente de IA para rascunhar respostas às mensagens de WhatsApp dos pacientes; a recepcionista revisa e envia. Eu esperava que o ganho fosse velocidade. O tempo médio de primeira resposta caiu de 47 para 12 minutos, mas o que me surpreendeu foi outra coisa: as reclamações sobre 'resposta fria' subiram nas duas primeiras semanas, até a Marta, recepcionista da unidade Centro, começar a reescrever a primeira frase de cada rascunho com o nome do paciente e algo da última consulta. Ela fez isso por conta própria. Em setembro as reclamações voltaram ao nível de antes e o tempo continuou em 12 minutos. Mudei de opinião: achava que a IA ia substituir a parte chata do trabalho; na prática ela deixou visível qual parte do trabalho era a importante.
+</material>
+
+<tarefa>
+Escreva um post de LinkedIn a partir do material acima, na primeira pessoa, mantendo o ponto de vista e o vocabulário de quem relatou a situação.
+</tarefa>
+
+<regras>
+Use apenas o que está no material. Se faltar um dado que o post pediria, como número, nome ou resultado, escreva o post sem ele em vez de estimar: dado inventado em post público custa credibilidade.
+Se o material não trouxer nenhuma situação concreta, não escreva o post. Responda com as duas ou três perguntas que faltam para escrevê-lo.
+Escreva em texto corrido, só palavras e pontuação, sem emojis, sem hashtags, sem marcadores e sem negrito. O registro é de alguém contando algo, não de peça de marketing.
+</regras>
+
+<formato_de_saida>
+Apenas o texto do post, pronto para colar, sem título e sem nenhum comentário antes ou depois.
+Primeira frase entrega a situação, e não uma pergunta retórica nem uma tese sobre o futuro do trabalho.
+Corpo em dois a quatro parágrafos, no máximo três frases cada.
+Fechamento em uma frase.
+</formato_de_saida>
+
+<criterios_de_sucesso>
+Nenhuma frase do post continua verdadeira se trocar o setor, a empresa, a pessoa ou o ano: toda afirmação está amarrada ao caso relatado.
+O post não contém nenhuma frase que seja observação geral sobre IA, produtividade ou futuro do trabalho.
+Quem conhece o autor reconhece a história como dele.
+Aplique os três critérios ao post inteiro, não apenas ao primeiro parágrafo.
+</criterios_de_sucesso>

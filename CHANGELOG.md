@@ -2,6 +2,15 @@
 
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); versões seguem [SemVer](https://semver.org/lang/pt-BR/). A versão vale para o plugin, a skill e o zip da Release ao mesmo tempo.
 
+## [1.0.2] - 2026-10-18
+
+### Alterado
+- Os sete exemplos foram gerados de novo com Claude Opus 5.5 (`claude-opus-5-5`, Claude Code 2.1.302), e as notas de cada um foram reescritas a partir das saídas novas. A versão 1.0.1 mantém os exemplos gerados com Claude Opus 5.
+- A comparação do exemplo 06 foi refeita no Opus 5.5 com o novo prompt revisado; a rodada do Opus 5 continua em `exemplos/resultados-06/opus-5/`.
+- `scripts/comparar.py` passou a medir texto além do post e caso declarado como inventado, conferidos contra a leitura manual das dezoito saídas. O detector anterior, baseado em títulos de raciocínio, deixava de contar bastidores escritos com outras palavras.
+- Os prompts exatos de cada variante ficam salvos em `exemplos/resultados-06/`.
+- CI passa a validar com Claude Code 2.1.302.
+
 ## [1.0.1] - 2026-10-17
 
 ### Adicionado

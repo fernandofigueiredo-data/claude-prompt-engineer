@@ -24,7 +24,7 @@ jobs:
 
       - name: Validador oficial de plugins do Claude Code
         run: |
-          npm install -g @anthropic-ai/claude-code@2.1.276
+          npm install -g @anthropic-ai/claude-code@2.1.302
           claude plugin validate .
           claude plugin validate plugins/engenharia-de-prompt
 
