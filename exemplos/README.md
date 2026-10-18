@@ -12,6 +12,8 @@ Cada arquivo traz uma entrada, a resposta integral da skill, sem edição, e uma
 | [Revisão de um prompt que não funciona](06-revisao-de-prompt.md) | B | seis antipadrões removidos e explicados |
 | [Pedido sem informação suficiente](07-lacuna-bloqueante.md) | nenhuma: perguntas | três perguntas fechadas em vez de um molde genérico |
 
+**Resultado medido.** Em [`resultados-06/`](resultados-06/), o prompt original e o revisado do exemplo 06 rodam três vezes cada sobre o mesmo material, com as saídas integrais e a medição reproduzível.
+
 ## Como foram gerados
 
 Execuções independentes, uma por entrada, numa pasta vazia, com apenas a skill carregada e sem acesso a outros arquivos:

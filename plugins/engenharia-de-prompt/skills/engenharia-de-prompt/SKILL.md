@@ -224,4 +224,4 @@ A entrega é reprovada se qualquer item falhar.
 - `references/calibracao-por-modelo.md`: diferenças entre Opus 5.5, Sonnet 5.5, Haiku 5.5 e Fable 5.1, regras herdadas de Opus 5 e Sonnet 5, parâmetros de API, esforço e raciocínio adaptativo.
 - `references/arquiteturas-de-prompt.md`: as sete arquiteturas com esqueleto pronto e critério de escolha.
 - `references/auditoria-de-vieses.md`: os nove padrões de distorção, heurística de detecção e operação de correção.
-- `references/blocos-reutilizaveis.md`: blocos testados para incerteza, formato, escopo, concisão, ferramentas e segurança de ações.
+- `references/blocos-reutilizaveis.md`: blocos prontos para incerteza, formato, escopo, concisão, ferramentas e segurança de ações.

@@ -2,6 +2,15 @@
 
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); versões seguem [SemVer](https://semver.org/lang/pt-BR/). A versão vale para o plugin, a skill e o zip da Release ao mesmo tempo.
 
+## [1.0.1] - 2026-10-17
+
+### Adicionado
+- Comparação medida em `exemplos/resultados-06/`: prompt original, original com o mesmo material e prompt revisado, três execuções cada, com as nove saídas e `scripts/comparar.py` para reproduzir a medição.
+
+### Corrigido
+- "Blocos testados" passou a "blocos prontos" no README e no SKILL.md: os blocos vêm da documentação oficial, mas não foram testados um a um neste repositório.
+- Prompt "antes" do README quebrado em linhas, sem rolagem horizontal.
+
 ## [1.0.0] - 2026-10-17
 
 ### Adicionado

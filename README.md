@@ -8,7 +8,7 @@ Uma skill para Claude que recebe uma ideia do jeito que ela está na sua cabeça
 
 O problema que ela resolve: a maior parte dos prompts falha não por falta de técnica, mas porque deixa o modelo adivinhar o formato, o escopo, o critério de sucesso e os fatos que ninguém forneceu. Esta skill diagnostica essas lacunas antes de escrever, pergunta só o que muda a forma da saída e calibra o texto para o modelo que vai executá-lo.
 
-> **Em números:** 6 etapas de método · 7 arquiteturas de prompt com esqueleto pronto · 10 testes de robustez antes de cada entrega · 9 padrões de viés auditados · 32 blocos reutilizáveis e 14 antipadrões · 7 exemplos reais com saída integral · calibração para 4 modelos atuais (Opus 5.5, Sonnet 5.5, Haiku 5.5, Fable 5.1) com fontes oficiais de 17/10/2026
+> **Em números:** 6 etapas de método · 7 arquiteturas de prompt com esqueleto pronto · 10 testes de robustez antes de cada entrega · 9 padrões de viés auditados · 32 blocos reutilizáveis e 14 antipadrões · 7 exemplos reais com saída integral e 1 comparação medida · calibração para 4 modelos atuais (Opus 5.5, Sonnet 5.5, Haiku 5.5, Fable 5.1) com fontes oficiais de 17/10/2026
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/metodologia-dark.svg">
@@ -22,7 +22,11 @@ O problema que ela resolve: a maior parte dos prompts falha não por falta de t�
 Um prompt real que *"não tá funcionando, os posts saem genéricos e enormes"*, enviado à skill para revisão:
 
 ```
-Você é um especialista de nível mundial em marketing digital. CRÍTICO: você DEVE SEMPRE pensar passo a passo e mostrar todo o seu raciocínio. Escreva um post para LinkedIn sobre IA no trabalho. Máximo 150 palavras. NÃO use emojis. NÃO use hashtags. NUNCA seja genérico. Verifique sua resposta antes de enviar.
+Você é um especialista de nível mundial em marketing digital.
+CRÍTICO: você DEVE SEMPRE pensar passo a passo e mostrar todo o seu raciocínio.
+Escreva um post para LinkedIn sobre IA no trabalho. Máximo 150 palavras.
+NÃO use emojis. NÃO use hashtags. NUNCA seja genérico.
+Verifique sua resposta antes de enviar.
 ```
 
 O diagnóstico da skill liga cada sintoma a uma causa: o tamanho vem do pedido de raciocínio visível e do limite em contagem de palavras; a genericidade vem da falta de matéria-prima, porque nenhum modelo é específico sobre uma categoria como "IA no trabalho" sem um caso concreto. `NUNCA seja genérico` vira um critério que se confere frase a frase.
@@ -67,6 +71,16 @@ Aplique os três critérios ao post inteiro, não apenas ao primeiro parágrafo.
 </details>
 
 Cortados do original, com o motivo registrado na resposta: o papel superlativo, a ênfase em caixa alta, o pedido de raciocínio visível, o limite em palavras, a autoverificação herdada e as quatro proibições sem alternativa.
+
+**O resultado, medido.** Os dois prompts rodaram três vezes cada no mesmo modelo, e o original rodou também com o mesmo relato colado no fim, para separar o efeito do material do efeito da reescrita:
+
+| Variante | Palavras na resposta | Com raciocínio ou checklist visível | Detalhes concretos do caso (de 7) | Emoji ou hashtag |
+|---|---|---|---|---|
+| Original | 348 (324–380) | 3 de 3 | 0,7 (0–1) | 0 de 3 |
+| Original + o mesmo material | 428 (391–477) | 3 de 3 | 6,3 (6–7) | 0 de 3 |
+| Revisado pela skill | 152 (147–157) | 0 de 3 | 5,7 (5–6) | 0 de 3 |
+
+O material explica a especificidade: com o mesmo relato, o prompt original também escreve um post concreto. A reescrita explica o resto. O original devolve o post precedido de uma seção de raciocínio (6 de 6 execuções) e, em geral, seguido de uma verificação (5 de 6); sem relato, inventa casos com números fictícios nas três execuções; o revisado devolve só o post, pronto para colar. Método, limites e as nove saídas em [`exemplos/resultados-06/`](exemplos/resultados-06/).
 
 ## Instalação
 
@@ -156,7 +170,7 @@ plugins/engenharia-de-prompt/
       calibracao-por-modelo.md         Opus 5.5, Sonnet 5.5, Haiku 5.5, Fable 5.1, API
       arquiteturas-de-prompt.md        as sete arquiteturas com esqueleto pronto
       auditoria-de-vieses.md           nove padrões, detecção e correção
-      blocos-reutilizaveis.md          32 blocos testados e 14 antipadrões
+      blocos-reutilizaveis.md          32 blocos prontos e 14 antipadrões
 instrucoes/INSTRUCOES-PROJECT-COWORK.md versão autossuficiente para colar
 exemplos/                              casos reais com entrada e saída integrais
 scripts/                               validação, empacotamento e diagrama
